@@ -6,13 +6,13 @@ SCRIPT_PATH="$(realpath "$0")"
 PROFILE_PATH="$HOME/.profile"
 
 setup_autostart() {
-    if ! grep -qF "$SCRIPT_PATH" "PROFILE_PATH"; then
+    if ! grep -qF "$SCRIPT_PATH" "$PROFILE_PATH"; then
         echo -e "\n# WebmToMp4\n/bin/bash $SCRIPT_PATH" >> "$PROFILE_PATH"
     fi
 }
 webm_to_mp4() {
 
-    if command -v ffmpeg &>/dev/null; then
+    if ! command -v ffmpeg &>/dev/null; then
         echo "install ffmpeg pls"
         return 1
     fi
@@ -41,7 +41,6 @@ main() {
     setup_autostart
     webm_to_mp4
     mp4_to_dir
-    echo "Webm to mp4 and move to ${L_DIR}"
 }
 
 main
