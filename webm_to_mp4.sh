@@ -2,7 +2,14 @@
 
 F_DIR="$HOME/Downloads"
 L_DIR="$HOME/VIDEO"
+SCRIPT_PATH="$(realpath "$0")"
+PROFILE_PATH="$HOME/.profile"
 
+setup_autostart() {
+    if ! grep -qF "$SCRIPT_PATH" "PROFILE_PATH"; then
+        echo -e "\n# WebmToMp4\n/bin/bash $SCRIPT_PATH" >> "$PROFILE_PATH"
+    fi
+}
 webm_to_mp4() {
 
     if command -v ffmpeg &>/dev/null; then
@@ -31,6 +38,7 @@ mp4_to_dir() {
 
 main() {
     cd $F_DIR 2>/dev/null || { echo "Ошибка: Директория ~/$F_DIR не найдена!"; exit 1; }
+    setup_autostart
     webm_to_mp4
     mp4_to_dir
     echo "Webm to mp4 and move to ${L_DIR}"
