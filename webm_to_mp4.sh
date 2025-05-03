@@ -20,7 +20,7 @@ webm_to_mp4() {
     for file_webm in *.webm; do
         if [[ -f "$file_webm" ]]; then
             file_mp4="${file_webm%.webm}.mp4"
-            ffmpeg -i $file $file_mp4 && rm $file_webm
+            ffmpeg -i $file_mp4 $file_mp4 && rm $file_webm
         fi
     done
 }
