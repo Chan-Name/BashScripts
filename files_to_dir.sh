@@ -1,10 +1,11 @@
 #!/bin/bash
 
 INITIAL_DIR="$HOME/Downloads"
-VIDEOS_DIR="$HOME/Video"
+VIDEOS_DIR="$HOME/Videos"
 MUSIC_DIR="$HOME/Music"
+PICTURES_DIR="$HOME/PICTURES"
 DOCUMENTS_DIR="$HOME/Documents"
-FOLDERS=("$INITIAL_DIR" "$VIDEOS_DIR" "$MUSIC_DIR" "$DOCUMENTS_DIR")
+FOLDERS=("$VIDEOS_DIR" "$MUSIC_DIR" "$PICTURES_DIR" "$DOCUMENTS_DIR" )
 
 SCRIPT_PATH="$(realpath "$0")"
 PROFILE_PATH="$HOME/.profile"
@@ -16,18 +17,15 @@ declare -A DIR_MAP=(
     ["ogg"]="$MUSIC_DIR"
     ["flac"]="$MUSIC_DIR"
     ["wav"]="$MUSIC_DIR"
+    ["img"]="$PICTURES_DIR"
+    ["jpeg"]="$PICTURES_DIR"
+    ["jpg"]="$PICTURES_DIR"
+    ["png"]="$PICTURES_DIR"
     ["pdf"]="$DOCUMENTS_DIR"
     ["doc"]="$DOCUMENTS_DIR"
 )
 
 shopt -u nullglob
-
-#systemd юниты для пидоров
-setup_autostart() {
-    if ! grep -qF "$SCRIPT_PATH" "$PROFILE_PATH"; then
-        echo -e "\n# FilesToDirs\n/bin/bash "$SCRIPT_PATH" " >> "$PROFILE_PATH"
-    fi
-}
 
 convert() {
     if ! command -v ffmpeg &>/dev/null; then
@@ -64,12 +62,9 @@ files_to_dir() {
 
 main() {
     cd "$INITIAL_DIR" 2>/dev/null || { echo " "$INITIAL_DIR" не существует"; exit 1; }
-    setup_autostart
-    while true; do
-        convert
-        files_to_dir
-        sleep $SLEEP_TIME
-    done
+    convert
+    files_to_dir
+    sleep $SLEEP_TIME
 }
 
 main
