@@ -1,23 +1,23 @@
 #!/bin/bash
 
-F_DIR="$HOME/Downloads"
-V_DIR="$HOME/Video"
-M_DIR="$HOME/Music"
-P_DIR="$HOME/Documents"
-FOLDERS=("$F_DIR" "$V_DIR" "$M_DIR" "$P_DIR")
+FILES_DIR="$HOME/Downloads"
+VIDEOS_DIR="$HOME/Video"
+MUSIC_DIR="$HOME/Music"
+DOCUMENTS_DIR="$HOME/Documents"
+FOLDERS=("$FILES_DIR" "$VIDEOS_DIR" "$MUSIC_DIR" "$DOCUMENTS_DIR")
 
 SCRIPT_PATH="$(realpath "$0")"
 PROFILE_PATH="$HOME/.profile"
 SLEEP_TIME=3000
 
 declare -A DIR_MAP=(
-    ["mp4"]="$V_DIR"
-    ["mp3"]="$M_DIR"
-    ["ogg"]="$M_DIR"
-    ["flac"]="$M_DIR"
-    ["wav"]="$M_DIR"
-    ["pdf"]="$P_DIR"
-    ["doc"]="$P_DIR"
+    ["mp4"]="$VIDEOS_DIR"
+    ["mp3"]="$MUSIC_DIR"
+    ["ogg"]="$MUSIC_DIR"
+    ["flac"]="$MUSIC_DIR"
+    ["wav"]="$MUSIC_DIR"
+    ["pdf"]="$DOCUMENTS_DIR"
+    ["doc"]="$DOCUMENTS_DIR"
 )
 
 shopt -u nullglob
