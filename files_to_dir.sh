@@ -1,10 +1,10 @@
 #!/bin/bash
 
-SOURCE_DIR="$HOME/Downloads"
+INITIAL_DIR="$HOME/Downloads"
 VIDEOS_DIR="$HOME/Video"
 MUSIC_DIR="$HOME/Music"
 DOCUMENTS_DIR="$HOME/Documents"
-FOLDERS=("$SOURCE_DIR" "$VIDEOS_DIR" "$MUSIC_DIR" "$DOCUMENTS_DIR")
+FOLDERS=("$INITIAL_DIR" "$VIDEOS_DIR" "$MUSIC_DIR" "$DOCUMENTS_DIR")
 
 SCRIPT_PATH="$(realpath "$0")"
 PROFILE_PATH="$HOME/.profile"
@@ -63,7 +63,7 @@ files_to_dir() {
 }
 
 main() {
-    cd "$F_DIR" 2>/dev/null || { echo "Ошибка: Директория $F_DIR не найдена!"; exit 1; }
+    cd "$INITIAL_DIR" 2>/dev/null || { echo " "$INITIAL_DIR" не существует"; exit 1; }
     setup_autostart
     while true; do
         convert
